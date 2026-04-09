@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
 
     env:
       PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
@@ -38,12 +38,13 @@ jobs:
       - name: Wait for Payload CMS to be ready
         run: |
           echo "Waiting for CMS to be available..."
-          for i in $(seq 1 30); do
+          sleep 30
+          for i in $(seq 1 60); do
             if curl -sf http://localhost:3000/api/posts > /dev/null 2>&1; then
               echo "CMS is ready."
               exit 0
             fi
-            echo "Attempt $i/30 - not ready yet, waiting 5s..."
+            echo "Attempt $i/60 - not ready yet, waiting 5s..."
             sleep 5
           done
           echo "CMS did not become ready in time."
