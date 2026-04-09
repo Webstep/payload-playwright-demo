@@ -1,0 +1,17 @@
+services:
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+
+  payload:
+    build: ./cms
+    ports:
+      - "3000:3000"
+    environment:
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongo:27017/payload}
+      - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-password}
+    depends_on:
+      - mongo

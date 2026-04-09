@@ -1,0 +1,41 @@
+stages:
+  - test
+
+variables:
+  PAYLOAD_SECRET: $PAYLOAD_SECRET           # Set in GitLab CI/CD → Variables (masked)
+  ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+  ADMIN_PASSWORD: ${ADMIN_PASSWORD:-password}
+
+playwright:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.52.0-noble
+  timeout: 15 minutes
+
+  services:
+    - name: mongo:6
+      alias: mongo
+
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq docker.io docker-compose-plugin curl
+    - docker compose up -d --build
+    - |
+      echo "Waiting for CMS to be available..."
+      for i in $(seq 1 30); do
+        curl -sf http://localhost:3000/api/posts > /dev/null 2>&1 && echo "CMS is ready." && break
+        echo "Attempt $i/30 - waiting 5s..."
+        sleep 5
+        [ "$i" -eq 30 ] && docker compose logs payload && exit 1
+      done
+
+  script:
+    - npm ci
+    - npm test
+
+  after_script:
+    - docker compose down
+
+  artifacts:
+    when: always
+    paths:
+      - playwright-report/
+    expire_in: 14 days
