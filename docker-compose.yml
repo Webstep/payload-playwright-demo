@@ -3,6 +3,12 @@ services:
     image: mongo:6
     ports:
       - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
 
   payload:
     build: ./cms
@@ -14,4 +20,6 @@ services:
       - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@example.com}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD:-password}
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    restart: on-failure
