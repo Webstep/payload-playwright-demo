@@ -142,6 +142,6 @@ test('clicking site logo from orders page navigates to shop homepage', async ({ 
 
   await expect(page).toHaveURL(/\/shop$/);
   await expect(page.getByTestId('product-grid')).toBeVisible();
-  await expect(page).toContainText('All products');
+  await expect(page.locator('body')).toContainText('All Products');
 });
 
