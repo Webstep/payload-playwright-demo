@@ -117,7 +117,7 @@ test('cancelled orders show red background on discontinued badge', async ({ page
     // Sjekk at statusen er riktig
     await expect(statusBadge).toHaveText('cancelled');
 
-    // Hvis du *også* vil sjekke at den har de riktige klassene for fargekoding:
+    // Hvis du også vil sjekke at den har de riktige klassene for fargekoding:
   await expect(statusBadge).toHaveClass(/badge discontinued/);
   await expect(statusBadge).toBeVisible();
 await expect(statusBadge).toHaveCSS('background-color', 'rgb(248, 215, 218)');
