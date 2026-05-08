@@ -3,7 +3,9 @@ import { defineConfig } from '@playwright/test';
 export default defineConfig({
   use: {
     baseURL: 'http://localhost:3000',
-    headless: true
+    headless: true,
+    // run browser with English (GB) locale so Payload admin UI renders in English
+    locale: 'en-GB',
   },
   retries: 1,
   testDir: './tests',
