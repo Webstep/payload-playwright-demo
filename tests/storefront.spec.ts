@@ -86,8 +86,11 @@ test('orders page shows seeded orders', async ({ page }) => {
   await expect(page).toHaveTitle(/Orders.*PayloadShop/);
   await expect(page.getByTestId('orders-table')).toBeVisible();
 
-  const rows = page.getByTestId('order-row');
-  await expect(rows).toHaveCount(5); // 5 seeded orders
+  // Check that seeded orders are present (regardless of total count)
+  const seededOrderNumbers = ['ORD-2024-001', 'ORD-2024-002', 'ORD-2024-003', 'ORD-2024-004', 'ORD-2024-005'];
+  for (const orderNumber of seededOrderNumbers) {
+    await expect(page.getByTestId('order-number').filter({ hasText: orderNumber })).toBeVisible();
+  }
 });
 
 test('orders table shows expected order data', async ({ page }) => {

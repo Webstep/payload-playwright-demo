@@ -12,14 +12,18 @@
     "test:headed": "playwright test --headed",
     "test:api": "playwright test tests/api.spec.ts",
     "test:auth": "playwright test tests/auth.spec.ts",
-    "test:posts": "playwright test tests/posts.spec.ts"
+    "test:posts": "playwright test tests/posts.spec.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npx playwright test --list"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0"
   },
   "dependencies": {
     "playwright-core": "^1.59.1"

@@ -13,8 +13,11 @@ test('CRUD order', async ({ request }) => {
       orderNumber,
       customerName: 'Test Customer',
       customerEmail: 'test@example.com',
+      address: '123 Test St',
+      city: 'Test City',
+      zip: '12345',
       status: 'pending',
-      items: [{ product: firstProduct.id, quantity: 2, priceAtPurchase: firstProduct.price }],
+      items: [{ productId: firstProduct.id, quantity: 2, price: firstProduct.price }],
       totalAmount: firstProduct.price * 2,
     },
   });
