@@ -86,7 +86,10 @@ test('orders page shows seeded orders', async ({ page }) => {
   await expect(page).toHaveTitle(/Orders.*PayloadShop/);
   await expect(page.getByTestId('orders-table')).toBeVisible();
 
-  const rows = page.getByTestId('order-row');
+  // Count only seeded orders (those starting with ORD-2024)
+  const rows = page.getByTestId('order-row').filter({
+    hasText: /ORD-2024/,
+  });
   await expect(rows).toHaveCount(5); // 5 seeded orders
 });
 
