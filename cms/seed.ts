@@ -87,6 +87,7 @@ const seedOrders = async (productIds: Record<string, string>): Promise<void> => 
       address: '123 Main St',
       city: 'Copenhagen',
       zip: '2100',
+      cardNumber: '1111',
       status: 'delivered',
       notes: 'Please gift wrap.',
       items: [
@@ -102,6 +103,7 @@ const seedOrders = async (productIds: Record<string, string>): Promise<void> => 
       address: '456 Oak Ave',
       city: 'Aarhus',
       zip: '8000',
+      cardNumber: '2222',
       status: 'shipped',
       notes: '',
       items: [
@@ -114,9 +116,10 @@ const seedOrders = async (productIds: Record<string, string>): Promise<void> => 
       orderNumber: 'ORD-2024-003',
       customerName: 'Carol Eriksen',
       customerEmail: 'carol@example.com',
-      address: '789 Elm Rd',
+      address: '789 Pine Rd',
       city: 'Odense',
       zip: '5000',
+      cardNumber: '3333',
       status: 'confirmed',
       notes: 'Leave at door.',
       items: [
@@ -130,9 +133,10 @@ const seedOrders = async (productIds: Record<string, string>): Promise<void> => 
       orderNumber: 'ORD-2024-004',
       customerName: 'David Nguyen',
       customerEmail: 'david@example.com',
-      address: '321 Pine Ln',
+      address: '321 Elm St',
       city: 'Aalborg',
       zip: '9000',
+      cardNumber: '4444',
       status: 'pending',
       notes: '',
       items: [
@@ -144,9 +148,10 @@ const seedOrders = async (productIds: Record<string, string>): Promise<void> => 
       orderNumber: 'ORD-2024-005',
       customerName: 'Eva Larsen',
       customerEmail: 'eva@example.com',
-      address: '654 Birch Blvd',
+      address: '654 Birch Ln',
       city: 'Randers',
       zip: '8900',
+      cardNumber: '5555',
       status: 'cancelled',
       notes: 'Customer changed mind.',
       items: [

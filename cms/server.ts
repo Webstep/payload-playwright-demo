@@ -1,12 +1,33 @@
 import express from 'express';
 import payload from 'payload';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import crypto from 'crypto';
 import { seed } from './seed';
 import storefrontRouter from './storefront';
 
 dotenv.config();
 
 const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// Session ID middleware
+app.use((req, res, next) => {
+  let sessionId = req.cookies.sessionId;
+  if (!sessionId) {
+    sessionId = crypto.randomBytes(16).toString('hex');
+    res.cookie('sessionId', sessionId, { 
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      httpOnly: true 
+    });
+  }
+  (req as any).cookies = req.cookies || {};
+  next();
+});
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL ?? 'admin@example.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD ?? 'password';

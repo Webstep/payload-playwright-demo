@@ -8,6 +8,7 @@
   "dependencies": {
     "payload": "1.15.12",
     "express": "^4.18.2",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
     "mongoose": "^7.0.0",
     "typescript": "^5.0.4",

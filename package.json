@@ -1,7 +1,7 @@
 {
   "name": "payload-playwright-demo",
   "version": "1.0.0",
-  "description": "",
+  "description": "A lightweight, free Payload CMS (MIT license) setup for Playwright API/UI testing.",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -12,13 +12,29 @@
     "test:headed": "playwright test --headed",
     "test:api": "playwright test tests/api.spec.ts",
     "test:auth": "playwright test tests/auth.spec.ts",
-    "test:posts": "playwright test tests/posts.spec.ts"
+    "test:posts": "playwright test tests/posts.spec.ts",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npx playwright test --list"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.59.1",
-    "@types/node": "^25.6.0"
-  }
+    "playwright": "^1.59.1",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.5.0"
+  },
+  "dependencies": {
+    "playwright-core": "^1.59.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Webstep/payload-playwright-demo.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Webstep/payload-playwright-demo/issues"
+  },
+  "homepage": "https://github.com/Webstep/payload-playwright-demo#readme"
 }
