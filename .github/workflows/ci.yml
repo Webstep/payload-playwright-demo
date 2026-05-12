@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+
+    - name: Install root deps
+      run: npm ci
+
+    - name: Install cms deps
+      run: npm --prefix cms ci
+
+    - name: Build and start services (docker)
+      run: |
+        docker compose up -d --build
+
+    - name: Wait for Payload admin to be available
+      run: |
+        for i in {1..60}; do
+          status=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000/admin || true)
+          if [ "$status" = "200" ]; then echo "payload up"; exit 0; fi
+          sleep 2
+        done
+        echo "Payload admin didn't become available"; exit 1
+
+    - name: Install Playwright browsers and dependencies
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests (Chromium)
+      run: npx playwright test --project=chromium --reporter=list,html
+
+    - name: Upload Playwright report
+      uses: actions/upload-artifact@v4
+      with:
+        name: playwright-report
+        path: playwright-report
