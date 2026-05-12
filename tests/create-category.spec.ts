@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 // Allow a longer timeout so slowMo runs complete when watching headed browser
 test.setTimeout(120000);
-test.use({ headless: false, launchOptions: { slowMo: 300 } });
+test.use({ headless: true, launchOptions: { slowMo: 300 } });
 
 const adminEmail = process.env.ADMIN_EMAIL ?? 'admin@example.com';
 const adminPassword = process.env.ADMIN_PASSWORD ?? 'password';
