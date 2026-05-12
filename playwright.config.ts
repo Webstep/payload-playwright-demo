@@ -8,11 +8,6 @@ export default defineConfig({
     locale: 'en-GB',
   },
   retries: 1,
-  projects: [
-    { name: 'chromium', use: { browserName: 'chromium' } },
-    { name: 'firefox', use: { browserName: 'firefox' } },
-    { name: 'webkit', use: { browserName: 'webkit' } },
-  ],
   testDir: './tests',
   reporter: [
     ['list'],
