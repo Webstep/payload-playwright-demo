@@ -11,6 +11,7 @@ export default buildConfig({
   serverURL: 'http://localhost:3000',
   admin: {
     disable: false,
+    // admin UI uses default locale (browser locale controls language)
   },
   collections: [
     // ── Auth ──────────────────────────────────────────────────────────────
